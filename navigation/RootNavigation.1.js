@@ -33,39 +33,21 @@ const globals = require('../globals');
 const ICON_SIZE = 24;
 
 export default class RootNavigation extends React.Component {
-   constructor(props) {
-    super(props);
-  
-  }
 
 async _checkLogin() {
-  try {
-    await AsyncStorage.getItem('@isLoggedIn:key', (err, key) => {
-      if (key === 'nada') {
+    try {
+      const value = await AsyncStorage.getItem('@isLoggedIn:key');
+      /*if (value !== 'teste'){
         // We have data!!
-        console.log('no login ', key);
-      } else {
-        console.log(key);
-        this._openLoginPage();
-      }
-    })
-  } catch(error) {
-    console.log(error);
-    // Error retrieving data       
-  } finally { 
-    this.setState({loggedIn: true})
-  }
-}
-    
-
-_renderIcon(name, isSelected) {
-    return (
-      <FontAwesome
-        name={name}
-        size={32}
-        color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
-      />
-    );
+        console.log(value);
+      } else {*/
+        console.log(value);
+         this._openLoginPage() 
+      //}
+    } catch (error) {
+       console.log(error);
+      // Error retrieving data       
+    }
   }
 
   _openLoginPage() {
@@ -79,51 +61,63 @@ _renderIcon(name, isSelected) {
          }));     
 
       this.props.navigator.push(Router.getRoute('loginScreen', route));    
-  }
+    
+
+}
 
   componentWillMount() { 
-     this._checkLogin() 
+     this._checkLogin()
+    
   } 
   
   componentDidMount() {
-    this._notificationSubscription = this._registerForPushNotifications(); 
+    this._notificationSubscription = this._registerForPushNotifications();
+   
+   
   }
   
   componentWillUnmount() {
     this._notificationSubscription && this._notificationSubscription.remove();
   }
+
   render() {
-    //if (this.state.loggedIn) {
-      return (
-        <TabNavigation
-          tabBarHeight={56}
-          initialTab="home">
-          <TabNavigationItem
-            title="Home"
-            id="home"
-            renderIcon={() => <Image source={require('./../assets/images/schedule-icon.png')} />} >
-            <StackNavigation initialRoute="home" />
-          </TabNavigationItem>
+    return (
+      <TabNavigation
+        tabBarHeight={56}
+        initialTab="home">
+        <TabNavigationItem
+          title="Home"
+          id="home"
+          renderIcon={() => <Image source={require('./../assets/images/schedule-icon.png')} />} > 
+          <StackNavigation initialRoute="home" />
+        </TabNavigationItem>
 
-          <TabNavigationItem
-            title="Venue"
-            id="venue"
-            renderIcon={() => <Image source={require('./../assets/images/venue-icon.png')} />} >
-            <StackNavigation initialRoute="venue" />
-          </TabNavigationItem>
+        <TabNavigationItem
+          title="Venue"
+          id="venue"
+          renderIcon={() => <Image source={require('./../assets/images/venue-icon.png')} />} > 
+          <StackNavigation initialRoute="venue" />
+        </TabNavigationItem>
 
-          <TabNavigationItem
-            title="Tweets"
-            id="settings"
-            renderIcon={() => <Image source={require('./../assets/images/tweets-icon.png')} />} >
-            <StackNavigation initialRoute="settings" />
-          </TabNavigationItem>
-        </TabNavigation>
-      );
-    //}   
+        <TabNavigationItem
+          title="Tweets"
+          id="settings"
+          renderIcon={() => <Image source={require('./../assets/images/tweets-icon.png')} />} >
+          <StackNavigation initialRoute="settings" />
+        </TabNavigationItem>
+      </TabNavigation>
+    );
   }
 
-  
+  _renderIcon(name, isSelected) {
+    return (
+      <FontAwesome
+        name={name}
+        size={32}
+        color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
+      />
+    );
+  }
 
   _registerForPushNotifications() {
     // Send our push token over to our backend so we can receive notifications

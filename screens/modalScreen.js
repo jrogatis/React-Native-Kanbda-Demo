@@ -29,7 +29,6 @@ export default class ModalScreen extends Component{
   
    
  _setModalVisible = (visible) => {
-      console.log('visivble', visible)  
       this.setState({modalVisible: visible});
     };
 
