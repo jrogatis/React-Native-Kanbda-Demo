@@ -1,8 +1,8 @@
 {
   "name": "reactjs-conf-2018",
   "version": "0.0.0",
-  "description": "Hello Exponent!",
-  "author": null,
+  "description": "My demo for Kambda",
+  "author": "Jean Philip de Rogatis",
   "main": "main.js",
   "scripts": {
     "test": "jest"
