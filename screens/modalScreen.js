@@ -26,10 +26,23 @@ export default class ModalScreen extends Component{
     currentOrientation: 'unknown',
   };
 
+
+
   
+  async _SetPopupSeen(visible) {
+    try {
+     await AsyncStorage.setItem('@PopupSeen:key', 'true');
+      } catch (error) {
+      // Error saving data
+    } finally {
+        this.setState({modalVisible: visible});
+    }
+    
+  }
+
    
  _setModalVisible = (visible) => {
-      this.setState({modalVisible: visible});
+      this._SetPopupSeen(visible)
     };
 
   render() {
