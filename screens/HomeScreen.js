@@ -15,7 +15,8 @@ import {
   ListView,
   Navigator,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
 
 import {
@@ -47,13 +48,49 @@ export default class HomeScreen extends Component {
     }
   }
 
+  async _checkPopSeen() {
+  try {
+    await AsyncStorage.getItem('@PopupSeen:key', (err, key) => {
+      if (key === 'true') {
+        // We have data!!
+        console.log('visto ', key);
+         this.setState({showPopUp: false})
+      } else {
+         console.log('nao visto ', key);
+         this.setState({showPopUp: true})
+      }
+    })
+  } catch(error) {
+    console.log(error);
+    // Error retrieving data       
+  } 
+}
+
+  componentWillMount() { 
+    this._checkPopSeen()
+  }  
+
   static route = {
     navigationBar: {
       title: 'Schedule',
     },
   }
-// <ModalScreen />    
+
   render() {
+    if (this.state.showPopUp) {
+      return (
+        <View style={styles.container} >
+          <ModalScreen />
+          <ListView
+            style={styles.list}
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRow.bind(this)}
+            renderSectionHeader={this.renderSectionHeader.bind(this)}
+            automaticallyAdjustContentInsets={false}
+            />
+        </View>
+      );
+    } else {
       return (
         <View style={styles.container} >
           <ListView
@@ -62,9 +99,10 @@ export default class HomeScreen extends Component {
             renderRow={this.renderRow.bind(this)}
             renderSectionHeader={this.renderSectionHeader.bind(this)}
             automaticallyAdjustContentInsets={false}
-            />        
+            />
         </View>
-    );
+      );
+    }  
   }
 
   

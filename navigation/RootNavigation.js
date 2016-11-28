@@ -41,7 +41,7 @@ export default class RootNavigation extends React.Component {
 async _checkLogin() {
   try {
     await AsyncStorage.getItem('@isLoggedIn:key', (err, key) => {
-      if (key === 'nada') {
+      if (key === 'June') {
         // We have data!!
         console.log('no login ', key);
       } else {

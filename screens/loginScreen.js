@@ -36,7 +36,7 @@ async _SetLogin(visible) {
       // Error saving data
     } finally {
       this.setState({ modalVisible: visible });
-      this.props.navigator.push('home');
+      this.props.navigator.push('rootNavigation');
     }
     
   }
