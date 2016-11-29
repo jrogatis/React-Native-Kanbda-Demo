@@ -5,11 +5,13 @@ import VenueScreen from '../screens/VenueScreen';
 import loginScreen from '../screens/loginScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RootNavigation from './RootNavigation';
+import HomeScreen from '../screens/HomeScreen';
 
 
 export default createRouter(() => ({
   venue: () => VenueScreen,
   settings: () => SettingsScreen,
   rootNavigation: () => RootNavigation,
-  loginScreen: () => loginScreen,
+  home: () => HomeScreen,
+  loginScreen: () => loginScreen
 }));

@@ -20,16 +20,12 @@ import {
 export default class loginScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       modalVisible: true,
     }
   }
   
-  componentDidMount() {    
-}
-
-async _SetLogin(visible) {
+  async _SetLogin(visible) {
     try {
      await AsyncStorage.setItem('@isLoggedIn:key', 'June');
       } catch (error) {
@@ -41,8 +37,8 @@ async _SetLogin(visible) {
     
   }
 
- _setModalVisible = (visible) => {
-    this._SetLogin(visible)
+  _setModalVisible = (visible) => {
+      this._SetLogin(visible)
     };  
 
 

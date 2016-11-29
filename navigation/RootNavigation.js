@@ -26,8 +26,8 @@ import {
 import Alerts from '../constants/Alerts';
 import Colors from '../constants/Colors';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
-//import loginScreen from '../screens/loginScreen';
-import HomeScreen from '../screens/HomeScreen';
+import Router from '../navigation/Router';
+
 
 const globals = require('../globals');
 
@@ -36,13 +36,17 @@ const ICON_SIZE = 24;
 export default class RootNavigation extends React.Component {
    constructor(props) {
     super(props);
-    console.log('props no rootnav', props)
   }
 
-  Router = createRouter(() => ({
-      
-       home: () => HomeScreen,
-         }));    
+
+  _openLoginPage() {
+    let route = {
+        name: 'loginScreen',
+        title: 'Login',
+        modalVisible: true
+      }; 
+    this.props.navigator.push(Router.getRoute('loginScreen', route));    
+  }
 
   _renderIcon(name, isSelected) {
       return (
@@ -52,7 +56,15 @@ export default class RootNavigation extends React.Component {
           color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
         />
       );
-    }
+  }
+  
+  componentWillMount() {
+     if (this.props.logedIn !== true) {
+        console.log('componentWillMount sem a key', this.props.logedIn)
+        this._openLoginPage()
+    }  
+  }
+
   componentDidMount() {
     this._notificationSubscription = this._registerForPushNotifications(); 
   }
@@ -60,10 +72,11 @@ export default class RootNavigation extends React.Component {
   componentWillUnmount() {
     this._notificationSubscription && this._notificationSubscription.remove();
   }
+
   render() {
     const RouteParam = {
       logedIn: this.props.logedIn
-    }
+      }
       return (
         <TabNavigation
           tabBarHeight={56}
@@ -73,7 +86,7 @@ export default class RootNavigation extends React.Component {
             id="home"
             renderIcon={() => <Image source={require('./../assets/images/schedule-icon.png')} />} >
             <StackNavigation
-              initialRoute={this.Router.getRoute('home', RouteParam)} />
+              initialRoute={Router.getRoute('home', RouteParam)} />
           </TabNavigationItem>
 
           <TabNavigationItem

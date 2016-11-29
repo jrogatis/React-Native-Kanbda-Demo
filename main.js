@@ -1,6 +1,6 @@
 import Exponent from 'exponent';
 import React from 'react';
-import loginScreen from './screens/loginScreen';
+//import loginScreen from './screens/loginScreen';
 
 
 import {
@@ -40,16 +40,6 @@ class AppContainer extends React.Component {
     this._loadAssetsAsync();
   }
 
-  _openLoginPage() {
-    let route = {
-        name: 'loginScreen',
-        title: 'Login',
-        modalVisible: true
-      }; 
-    this.props.navigator.push(Router.getRoute('loginScreen', route));    
-  }
-
-
   async _loadAssetsAsync() {
     try {
       await cacheAssetsAsync({
@@ -65,15 +55,13 @@ class AppContainer extends React.Component {
       await AsyncStorage.getItem('@isLoggedIn:key', (err, key) => {
         if (key === 'June') {
           // We have data!!
-          console.log('no login do main ', key);
+          console.log('no login do main com a key', key);
           this.props.logedIn = true
         } else {
-          console.log(key);
-          this._openLoginPage();
+          console.log('no login do main sem a key', key);
           this.props.logedIn = false
         }
-      }) 
-
+      }); 
     } catch(e) {
       console.warn(
         'There was an error caching assets (see: main.js), perhaps due to a ' +
@@ -88,7 +76,7 @@ class AppContainer extends React.Component {
   render() {
     if (this.state.appIsReady) {
        const RouteParam = {
-      logedIn: this.props.logedIn
+          logedIn: this.props.logedIn
        }
        console.log('no main o root param', RouteParam)
       return (

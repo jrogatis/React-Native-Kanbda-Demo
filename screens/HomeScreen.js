@@ -55,7 +55,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    if (this.props.logedIn === false) {
+    if (this.props.logedIn !== true) {
       return (
         <View style={styles.container} >
           <ModalScreen />
