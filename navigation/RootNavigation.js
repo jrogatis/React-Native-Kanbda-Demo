@@ -26,7 +26,8 @@ import {
 import Alerts from '../constants/Alerts';
 import Colors from '../constants/Colors';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
-import loginScreen from '../screens/loginScreen';
+//import loginScreen from '../screens/loginScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 const globals = require('../globals');
 
@@ -35,56 +36,23 @@ const ICON_SIZE = 24;
 export default class RootNavigation extends React.Component {
    constructor(props) {
     super(props);
-  
+    console.log('props no rootnav', props)
   }
 
-async _checkLogin() {
-  try {
-    await AsyncStorage.getItem('@isLoggedIn:key', (err, key) => {
-      if (key === 'June') {
-        // We have data!!
-        console.log('no login ', key);
-      } else {
-        console.log(key);
-        this._openLoginPage();
-      }
-    })
-  } catch(error) {
-    console.log(error);
-    // Error retrieving data       
-  } finally { 
-    this.setState({loggedIn: true})
-  }
-}
-    
+  Router = createRouter(() => ({
+      
+       home: () => HomeScreen,
+         }));    
 
-_renderIcon(name, isSelected) {
-    return (
-      <FontAwesome
-        name={name}
-        size={32}
-        color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
-      />
-    );
-  }
-
-  _openLoginPage() {
-  let route = {
-      name: 'loginScreen',
-      title: 'Login',
-      modalVisible: true
-    }; 
-    const Router = createRouter(() => ({
-          loginScreen: () => loginScreen
-         }));     
-
-      this.props.navigator.push(Router.getRoute('loginScreen', route));    
-  }
-
-  componentWillMount() { 
-     this._checkLogin() 
-  } 
-  
+  _renderIcon(name, isSelected) {
+      return (
+        <FontAwesome
+          name={name}
+          size={32}
+          color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
+        />
+      );
+    }
   componentDidMount() {
     this._notificationSubscription = this._registerForPushNotifications(); 
   }
@@ -93,7 +61,9 @@ _renderIcon(name, isSelected) {
     this._notificationSubscription && this._notificationSubscription.remove();
   }
   render() {
-    //if (this.state.loggedIn) {
+    const RouteParam = {
+      logedIn: this.props.logedIn
+    }
       return (
         <TabNavigation
           tabBarHeight={56}
@@ -102,7 +72,8 @@ _renderIcon(name, isSelected) {
             title="Home"
             id="home"
             renderIcon={() => <Image source={require('./../assets/images/schedule-icon.png')} />} >
-            <StackNavigation initialRoute="home" />
+            <StackNavigation
+              initialRoute={this.Router.getRoute('home', RouteParam)} />
           </TabNavigationItem>
 
           <TabNavigationItem
@@ -120,7 +91,6 @@ _renderIcon(name, isSelected) {
           </TabNavigationItem>
         </TabNavigation>
       );
-    //}   
   }
 
   

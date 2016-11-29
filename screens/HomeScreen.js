@@ -33,7 +33,7 @@ let scheduleJson = require('../schedule.json.js');
 export default class HomeScreen extends Component {
   constructor(props) { 
     super(props);
-    
+    console.log('props no home', props);
     var ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -48,28 +48,6 @@ export default class HomeScreen extends Component {
     }
   }
 
-  async _checkPopSeen() {
-  try {
-    await AsyncStorage.getItem('@PopupSeen:key', (err, key) => {
-      if (key === 'true') {
-        // We have data!!
-        console.log('visto ', key);
-         this.setState({showPopUp: false})
-      } else {
-         console.log('nao visto ', key);
-         this.setState({showPopUp: true})
-      }
-    })
-  } catch(error) {
-    console.log(error);
-    // Error retrieving data       
-  } 
-}
-
-  componentWillMount() { 
-    this._checkPopSeen()
-  }  
-
   static route = {
     navigationBar: {
       title: 'Schedule',
@@ -77,7 +55,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    if (this.state.showPopUp) {
+    if (this.props.logedIn === false) {
       return (
         <View style={styles.container} >
           <ModalScreen />

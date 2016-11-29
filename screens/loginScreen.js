@@ -65,8 +65,10 @@ async _SetLogin(visible) {
                 onPress={this._setModalVisible.bind(this, false)}
               >
              <FontAwesome name="facebook-f" size={32} color="white" />
-             <Text>
-                FaceBook
+             <Text
+                style={styles.buttonSubText}
+                >
+                aceBook
               </Text>  
             </Button>
         </View>  
@@ -75,41 +77,6 @@ async _SetLogin(visible) {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "rgba(106, 215, 248, 1)",
-    justifyContent: 'center',
-     flexDirection: 'row', 
-
-  },
-  button: {
-    borderRadius: 20,
-    borderWidth: 0,
-    borderColor: "rgba(255, 255, 255, 0)",
-    justifyContent: 'center',
-    backgroundColor: "rgb(28, 28, 222)",
-    width: 100,
-  },
-  buttonText: {
-    margin: 5, 
-  },
-  modalButton: {
-    marginTop: 10,
-  },
-  buttonArea: {
-     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonHeader: {
-    color: "rgba(255, 255, 255, 1)",
-    fontSize: 25
-  }
-});
-
 
 class Button extends React.Component {
   state = {
@@ -140,3 +107,42 @@ class Button extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "rgba(106, 215, 248, 1)",
+    justifyContent: 'center',
+     flexDirection: 'row', 
+
+  },
+  button: {
+    borderRadius: 20,
+    borderWidth: 0,
+    borderColor: "rgba(255, 255, 255, 0)",
+    justifyContent: 'center',
+    backgroundColor: "rgb(28, 28, 222)",
+    width: 120,
+  },
+  buttonText: {
+    margin: 5, 
+  },
+  buttonSubText: {
+    color: "rgba(255, 255, 255, 1)",
+    fontSize: 20,
+  
+  },
+  modalButton: {
+    marginTop: 10,
+  },
+  buttonArea: {
+     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonHeader: {
+    color: "rgba(255, 255, 255, 1)",
+    fontSize: 25
+  }
+});
