@@ -1,0 +1,56 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - react-native > connect > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > body-parser > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > compression > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > connect-timeout > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > express-session > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > finalhandler > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > morgan > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > serve-index > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > connect > serve-static > send > debug:
+        patched: '2022-01-17T15:22:38.786Z'
+  'npm:hoek:20180212':
+    - react-native > joi > hoek:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > joi > topo > hoek:
+        patched: '2022-01-17T15:22:38.786Z'
+  'npm:lodash:20180130':
+    - react-native > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-environment > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-generator > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > plist > xmlbuilder > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-environment > inquirer > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-generator > inquirer > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-generator > yeoman-environment > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > yeoman-generator > html-wiring > cheerio > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+    - react-native > xcode > simple-plist > plist > xmlbuilder > lodash:
+        patched: '2022-01-17T15:22:38.786Z'
+  'npm:mime:20170907':
+    - react-native > connect > serve-static > send > mime:
+        patched: '2022-01-17T15:22:38.786Z'
+  'npm:tunnel-agent:20170305':
+    - react-native > yeoman-generator > download > caw > tunnel-agent:
+        patched: '2022-01-17T15:22:38.786Z'
